@@ -1,0 +1,9 @@
+# Here, we have two opposing parties, A and C, and a more moderate 3rd party,
+# B. Most A and C voters hate the other party so much they are willing to
+# approve of B to avoid the worst-case scenario, so B wins, despite "pure-B"
+# voters being fewer in number than either A or C.
+25,A
+20,A,B
+10,B
+25,B,C
+20,C

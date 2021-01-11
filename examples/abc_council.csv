@@ -1,0 +1,12 @@
+# Election for a 9-seat city council.
+# Most in the city are Party A.
+# B and C are the two minor parties, with B having
+# more support than C.
+# A runs 9 candidates, B runs 9, and C only 3, given
+# they are a small portion of the population. But C voters vote only for C candidates
+# to ensure they have the best chance of gaining representation.
+# (With proportional approval voting, if you are in a minor party, it virtually never
+# would make sense to vote for someone from a party other than your own party.)
+700,A1,A2,A3,A4,A5,A6,A7,A8,A9
+200,B1,B2,B3,B4,B5,B6,B7,B8,B9
+100,C1,C2,C3
