@@ -108,6 +108,7 @@ def parse_ballots(ballot_file: os.PathLike) -> List[Ballot]:
                 number = int(first)
             except ValueError:
                 number = 1
+                rest = [first] + rest
             approved_candidates = [Candidate(name.strip()) for name in rest]
 
             for _ in range(number):
