@@ -30,7 +30,7 @@ class Candidate:
 @dataclass
 class Ballot:
     approved_candidates: List[Candidate]
-    weight: Union[int, float] = 1  #pylint:disable=unsubscriptable-object
+    weight: Union[int, float] = 1  # pylint:disable=unsubscriptable-object
 
 
 @dataclass
@@ -44,7 +44,8 @@ class Round:
 
     def __repr__(self) -> str:
         """Console-based representation of the results of this round of voting."""
-        headers = ["Name", "Approve", "Do Not Approve", "Percent Approve", "Percent Do Not Approve"]
+        headers = ["Name", "Approve", "Do Not Approve",
+                   "Percent Approve", "Percent Do Not Approve"]
         table = []
         win = True
         votes = self.weighted_votes
@@ -53,7 +54,8 @@ class Round:
                 win = " (winner)"
             else:
                 win = ""
-            table.append([candidate.name + win, score, votes - score, score/votes, (votes-score)/votes])
+            table.append([candidate.name + win, score, votes -
+                          score, score/votes, (votes-score)/votes])
 
         return tabulate(table, headers=headers, floatfmt=(None, "", "", ".2%", ".2%"))
 
@@ -94,6 +96,7 @@ def parse_ballots(ballot_file: os.PathLike) -> List[Ballot]:
     """
     ballots = []
     # See https://stackoverflow.com/questions/14158868/python-skip-comment-lines-marked-with-in-csv-dictreader
+
     def decomment(csvfile):
         for row in csvfile:
             raw = row.split('#')[0].strip()
@@ -136,7 +139,8 @@ def approval_election(ballots: List[Ballot], seats: int = 1) -> Result:
         (winner, _), *_ = scores.most_common()
 
         winners.append(winner)
-        rounds.append(Round(winner, scores.copy(), sum(b.weight for b in ballots)))
+        rounds.append(Round(winner, scores.copy(),
+                            sum(b.weight for b in ballots)))
 
         for ballot in ballots:
             m = sum(1 for c in ballot.approved_candidates if c in winners)
@@ -146,9 +150,11 @@ def approval_election(ballots: List[Ballot], seats: int = 1) -> Result:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Approval election command line tool")
+    parser = argparse.ArgumentParser(
+        description="Approval election command line tool")
     parser.add_argument('ballot_file', help="CSV file with ballot data")
-    parser.add_argument('--seats', type=int, default=1, help="Number of winners (default 1)")
+    parser.add_argument('--seats', type=int, default=1,
+                        help="Number of winners (default 1)")
     args = parser.parse_args()
 
     ballots = parse_ballots(args.ballot_file)
